@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {v4 as uuid} from 'uuid'
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import Member from './Member'
+// import Member from './Member'
 
 const initialTeam =  [{
   id: uuid(),
@@ -34,15 +34,16 @@ const[teamValues, setTeamValues] = useState(initialTeamValues)
 
 
 const updateTeam = (newName, newValue) => {
-setMembers({...members, [newName]: newValue})
+setTeamValues({...teamValues, [newName]: newValue})
 
 }
 
 const submitTeam = () => {
   const member ={
-    username: members.username.trim(),
-    email: members.email.trim(),
-    character: members.character
+    id: uuid(),
+    username: teamValues.username.trim(),
+    email: teamValues.email.trim(),
+    character: teamValues.character
   }
 
   if(!member.username || !member.email || !member.character) return;
@@ -63,10 +64,20 @@ const submitTeam = () => {
 
 useEffect(() => {
   fakeAxiosGet('fakeapi.com')
-  .then(response => {
+  .then(response => 
     setMembers(response.data)
-  })
+  )
 },[])
+
+const onChange = event => {
+  const {name, value} = event.target
+  updateTeam(name, value)
+}
+
+const onSubmit = event => {
+  event.preventDefault()
+  submitTeam()
+}
 
   return (
     <div className="App">
@@ -74,31 +85,62 @@ useEffect(() => {
       <form className='formContainer'>
         <div className='formInfo'>
           <label>Username:
-          <input/>
+          <input
+          value={teamValues.username}
+          onChange={onChange}
+          name='username'
+          type='text'
+          maxLength='25'
+          placeholder='enter your username here'
+          />
           </label>
           
           <label>Email:
-          <input/>
+          <input
+          value={teamValues.email}
+          onChange={onChange}
+          name='email'
+          type='email'
+          maxLength='30'
+          placeholder='enter your email here'
+
+          />
           </label>
           
           <label>Choose Your Character:
-          <select>
-
+          <select
+          value={teamValues.character}
+          name='character'
+          onChange={onChange}
+          >
+            <option value=''>-- Select your Player --</option>
+            <option value='Cleric'>Cleric</option>
+            <option value='Ranger'>Ranger</option>
+            <option value='Wizard'>Wizard</option>
+            <option value='Bard'>Bard</option>
+            <option value='Barbarian'>Barbarian</option>
+            
             </select>
           </label>
 
+        <button type='submit' onClick={onSubmit} 
+        disabled={!teamValues.username || !teamValues.email || !teamValues.character? true : false }
+          >Submit</button>
+          </div>
+</form>
           {
             members.map(member => {
-              return(
-                <Member key={member.id} details={member}/>
+             
+            return(
+                <div className='memberCard' key={member.id}>
+                    <h3>Username: {member.username}</h3>
+                    <h3>Email: {member.email}</h3>
+                    <h3>Character: {member.character}</h3>
+                </div>
               )
             })
           }
-        </div>
-
-
-
-      </form>
+        
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

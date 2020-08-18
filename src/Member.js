@@ -2,7 +2,7 @@ import React from 'react'
 
 function Member(props){
     const {details} = props
-
+    console.log(details)
     if(!details){
         return <h3>Role for initiative </h3>
     }
