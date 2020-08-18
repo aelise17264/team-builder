@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {v4 as uuid} from 'uuid'
 import logo from './logo.svg';
 import './App.css';
+import Member from './Member'
 
 const initialTeam =  [{
   id: uuid(),
@@ -27,6 +28,46 @@ const fakeAxiosPost = (url, { username, email, character }) => {
 
 
 function App() {
+
+const[members, setMembers] = useState([])
+const[teamValues, setTeamValues] = useState(initialTeamValues)
+
+
+const updateTeam = (newName, newValue) => {
+setMembers({...members, [newName]: newValue})
+
+}
+
+const submitTeam = () => {
+  const member ={
+    username: members.username.trim(),
+    email: members.email.trim(),
+    character: members.character
+  }
+
+  if(!member.username || !member.email || !member.character) return;
+
+  fakeAxiosPost('nothing', member)
+  .then(response => {
+    setMembers([response.data, ...members]);
+    setTeamValues(initialTeamValues)
+  })
+  .catch(error => {
+    console.log('check your post')
+  })
+  .finally(() => {
+    setTeamValues(initialTeamValues)
+  })
+
+}
+
+useEffect(() => {
+  fakeAxiosGet('fakeapi.com')
+  .then(response => {
+    setMembers(response.data)
+  })
+},[])
+
   return (
     <div className="App">
       <header><h1>Join the Quest</h1></header>
@@ -45,6 +86,14 @@ function App() {
 
             </select>
           </label>
+
+          {
+            members.map(member => {
+              return(
+                <Member key={member.id} details={member}/>
+              )
+            })
+          }
         </div>
 
 
