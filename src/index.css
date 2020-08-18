@@ -1,3 +1,16 @@
+html {
+  background-color: #faeee7;
+
+}
+
+.App {
+    background-size: cover;
+    background-attachment: fixed;
+    height:700px;
+    margin-top: 0;
+    
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,7 +20,112 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+.formInfo {
+  background-color: #d8d3cd;
+  box-shadow: 0px 0px 20px 5px #b030b0; 
+  border-radius: 10%;  
+  width: 50%; 
+  height: 40vh;
+  margin: 30px auto ;
+    padding-top: 2%;
+  animation: bounce 1.5s infinite;
+  color: #202060;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  padding-right: 1%;
+  font-size: 1.2rem;
+}
+
+
+
+label { 
+  width:150px;
+  border-radius: 8%;
+  font-weight: bold;
+  padding-top: 1%;
+  /* margin-bottom: 10px; */
+  align-content: center;
+text-align: center;
+padding-right: 10%;
+  
+}
+input{
+ 
+  width:125%;
+  border-radius: 8%;
+  margin-bottom: 10px;
+ text-align: center;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  margin-left: 0;
+  font-size: 1rem;
+  padding-bottom: 1%;
+
+}
+
+
+select{
+  width:130%;
+  padding: 1%;
+  
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  margin-left: 1.5%;
+  font-size: 1rem;
+}
+
+
+
+button{
+  height: 5vh;
+  width: 10vw;
+  border: none;
+  background-color: #602080;
+  border-radius: 28%;
+  color: white;
+  align-items: center;
+  text-align: center;
+  margin-top: 5%;
+  font-size: 1rem;
+}
+
+
+.memberCard{
+  background-color: #c7e2b2;
+ 
+  padding: 2% 0;
+  width: 70%;
+  align-items: center;
+  margin: 0 15%;
+  border: solid 5px #006a71;
+}
+
+
+@keyframes bounce{
+  0%{
+    
+  }
+  50%{
+    transform: translate(0, 8px);
+  }
+
+}
+@keyframes shadow{
+  0%{
+    
+  }
+  50%{
+    opacity: 0.8;
+    width: 50%;
+  }
 }

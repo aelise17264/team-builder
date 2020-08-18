@@ -107,7 +107,7 @@ const onSubmit = event => {
           />
           </label>
           
-          <label>Choose Your Character:
+          <label>Character:
           <select
           value={teamValues.character}
           name='character'
